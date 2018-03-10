@@ -5,7 +5,7 @@ const Sequelize = require('sequelize')
 const sequelize = new Sequelize('coalibot', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
   host: process.env.DB_IP,
   dialect: 'postgres',
-
+  operatorsAliases: false,
   pool: {
     max: 5,
     min: 0,
