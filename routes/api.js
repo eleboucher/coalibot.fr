@@ -26,6 +26,8 @@ router.get('/users', function(req, res) {
   Command.findAll({
     attributes: ['user', sequelize.fn('COUNT', sequelize.col('*'))],
     group: ['user'],
+    order: [['count', 'DESC']],
+    limit: 20,
     raw: true
   })
     .then(function(result) {
@@ -40,6 +42,8 @@ router.get('/commands', function(req, res) {
   Command.findAll({
     attributes: ['command_name', sequelize.fn('COUNT', sequelize.col('*'))],
     group: ['command_name'],
+    order: [['count', 'DESC']],
+    limit: 20,
     raw: true
   })
     .then(function(result) {
