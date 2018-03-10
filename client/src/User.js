@@ -1,4 +1,4 @@
-import { Doughnut } from 'react-chartjs-2'
+import { Scatter } from 'react-chartjs-2'
 import React, { Component } from 'react'
 class User extends Component {
   constructor(props) {
@@ -24,7 +24,6 @@ class User extends Component {
       return e.count
     })
     return {
-      labels: labels,
       datasets: [
         {
           label: 'Users',
