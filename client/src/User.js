@@ -24,6 +24,7 @@ class User extends Component {
       return e.count
     })
     return {
+      labels: labels,
       datasets: [
         {
           label: 'Users',

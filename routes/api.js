@@ -27,6 +27,7 @@ router.get('/users', function(req, res) {
     attributes: ['user', sequelize.fn('COUNT', sequelize.col('*'))],
     group: ['user'],
     order: [['count', 'DESC']],
+    limit: 5,
     raw: true
   })
     .then(function(result) {
