@@ -2,8 +2,8 @@ var express = require('express')
 var router = express.Router()
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('genesixx_testcoal', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-  host: process.env.DB_HOST,
+const sequelize = new Sequelize('coalibot', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+  host: process.env.DB_IP,
   dialect: 'postgres',
 
   pool: {
