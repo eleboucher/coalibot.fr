@@ -1,4 +1,4 @@
-import { Bar } from 'react-chartjs-2'
+import { Radar } from 'react-chartjs-2'
 import React, { Component } from 'react'
 
 class Command extends Component {
@@ -30,7 +30,11 @@ class Command extends Component {
         {
           label: 'Commands',
           data: data,
-          backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850']
+          fill: true,
+          backgroundColor: 'rgba(179,181,198,0.2)',
+          borderColor: 'rgba(179,181,198,1)',
+          pointBorderColor: '#fff',
+          pointBackgroundColor: 'rgba(179,181,198,1)'
         }
       ]
     }
@@ -47,7 +51,7 @@ class Command extends Component {
     return (
       <div>
         <h1 className="title">Command</h1>
-        <Bar data={this.state.users} />
+        <Radar data={this.state.users} />
       </div>
     )
   }
