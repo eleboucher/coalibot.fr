@@ -1,4 +1,4 @@
-import { Scatter } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 import React, { Component } from 'react'
 class User extends Component {
   constructor(props) {
