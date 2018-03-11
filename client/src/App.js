@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-import User from './User'
-import Command from './Command'
-import Lastest from './Lastest'
-//import './App.css'
+import React, { Component } from 'react';
+import User from './User';
+import Command from './Command';
+import Lastest from './Lastest';
 
 class App extends Component {
   render() {
@@ -12,8 +11,8 @@ class App extends Component {
         <Command />
         <Lastest />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;

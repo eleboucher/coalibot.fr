@@ -1,29 +1,29 @@
-import { Radar } from 'react-chartjs-2'
-import React, { Component } from 'react'
+import { Radar } from 'react-chartjs-2';
+import React, { Component } from 'react';
 
 class Command extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      users: []
-    }
+      users: {}
+    };
   }
   componentDidMount() {
-    this.fetchData()
-    this.timerID = setInterval(() => this.fetchData(), 1000)
+    this.fetchData();
+    this.timerID = setInterval(() => this.fetchData(), 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID)
+    clearInterval(this.timerID);
   }
 
   chartData(json) {
     var labels = json.map(function(e) {
-      return e.command_name
-    })
+      return e.command_name;
+    });
     var data = json.map(function(e) {
-      return e.count
-    })
+      return e.count;
+    });
     return {
       labels: labels,
       datasets: [
@@ -38,24 +38,24 @@ class Command extends Component {
           pointHoverBorderColor: 'rgba(255,99,132,1)'
         }
       ]
-    }
+    };
   }
 
   fetchData() {
     fetch('/api/commands')
       .then(res => res.json())
       .then(json => this.chartData(json))
-      .then(users => this.setState({ users }))
+      .then(users => this.setState({ users }));
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h1 className="title">Command</h1>
         <Radar data={this.state.users} />
       </div>
-    )
+    );
   }
 }
 
-export default Command
+export default Command;
