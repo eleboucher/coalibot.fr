@@ -30,8 +30,8 @@ class Command extends Component {
         {
           label: 'Commands',
           data: data,
-          backgroundColor: '#3e95cd',
-          borderColor: '#3e95cd',
+          backgroundColor: 'rgba(62, 149, 205, 0.2)',
+          borderColor: 'rgba(62, 149, 205, 1)',
           pointBackgroundColor: '#244c66',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
