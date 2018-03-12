@@ -7,4 +7,4 @@ import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render(<App />, document.getElementById('app'))
 ReactDOM.render(<Lastest />, document.getElementById('lastest'))
-registerServiceWorker()
+//registerServiceWorker()
