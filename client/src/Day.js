@@ -30,7 +30,7 @@ class Day extends Component {
         {
           label: 'Day',
           data: data,
-          backgroundColor: '#rgba(62, 149, 205, 0.2)',
+          backgroundColor: 'rgba(62, 149, 205, 0.2)',
           fill: true
         }
       ],
