@@ -77,7 +77,7 @@ router.get('/days', function(req, res) {
     where: {
       date: {
         [Op.gte]: moment()
-          .subtract(30, 'days')
+          .subtract(7, 'days')
           .toDate()
       }
     },
