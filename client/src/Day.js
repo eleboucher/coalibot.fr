@@ -33,7 +33,18 @@ class Day extends Component {
           backgroundColor: 'rgba(255,99,132,0.2)',
           fill: true
         }
-      ]
+      ],
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        }
+      }
     }
   }
 
