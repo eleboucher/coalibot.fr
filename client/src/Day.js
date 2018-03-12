@@ -34,17 +34,7 @@ class Day extends Component {
           fill: true
         }
       ],
-      options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
+      options: { yAxes: [{ ticks: { min: 0, beginAtZero: true } }] }
     }
   }
 
