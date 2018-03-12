@@ -1,6 +1,7 @@
-import { Doughnut } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 import React, { Component } from 'react'
-class User extends Component {
+
+class Day extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,7 +19,7 @@ class User extends Component {
 
   chartData(json) {
     var labels = json.map(function(e) {
-      return e.user
+      return e.day
     })
     var data = json.map(function(e) {
       return e.count
@@ -27,15 +28,17 @@ class User extends Component {
       labels: labels,
       datasets: [
         {
+          label: 'Day',
           data: data,
-          backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850']
+          backgroundColor: 'rgba(255,99,132,0.2)',
+          fill: true
         }
       ]
     }
   }
 
   fetchData() {
-    fetch('/api/users')
+    fetch('/api/days')
       .then(res => res.json())
       .then(json => this.chartData(json))
       .then(users => this.setState({ users }))
@@ -44,11 +47,11 @@ class User extends Component {
   render() {
     return (
       <div className="container">
-        <h1 className="title">Users</h1>
-        <Doughnut data={this.state.users} />
+        <h1 className="title">Day</h1>
+        <Line data={this.state.users} />
       </div>
     )
   }
 }
 
-export default User
+export default Day

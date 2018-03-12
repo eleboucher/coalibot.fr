@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#e2e2e2e">
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
-    <link rel="stylesheet" href="%PUBLIC_URL%/bulma.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/style.css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="#e2e2e2e">
+	<link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+	<link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+	<link rel="stylesheet" href="%PUBLIC_URL%/bulma.css">
+	<link rel="stylesheet" href="%PUBLIC_URL%/style.css">
 
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <title>Coalibot</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <section class="hero is-info">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Coalibot Statistic
-        </h1>
-        <h2 class="subtitle">
-          Find it on <a href="https://github.com/genesixx/coalibot.fr"><i class="fab fa-github"></i></a>
-        </h2>
-      </div>
-    </div>
-  </section>
-	<section class="section">
-    <div id="app"></div>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<title>Coalibot</title>
+</head>
+<body>
+	<noscript>
+		You need to enable JavaScript to run this app.
+	</noscript>
+	<section class="hero is-info">
+		<div class="hero-body">
+			<div class="container">
+				<div class="columns is-vcentered">
+					<div class="column">
+						<h1 class="title">
+							Coalibot Statistic
+						</h1>
+						<h2 class="subtitle">
+							Find it on <a href="https://github.com/genesixx/coalibot.fr"><i class="fab fa-github"></i></a>
+						</h2>
+					</div>
+					<div id="lastest">
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
-  </body>
+	<section class="section">
+		<div class="container">
+			<div id="app"></div>
+		</div>
+	</section>
+</body>
 </html>
