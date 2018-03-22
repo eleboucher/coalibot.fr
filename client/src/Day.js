@@ -18,6 +18,9 @@ class Day extends Component {
   }
 
   chartData(json) {
+    json.sort(function(a, b) {
+      return a.day.localeCompare(b.day)
+    })
     var labels = json.map(function(e) {
       return moment(e.day).format('dddd')
     })
@@ -41,12 +44,6 @@ class Day extends Component {
   fetchData() {
     fetch('/api/days')
       .then(res => res.json())
-      .then(res => {
-        res.sort(function(a, b) {
-          return a.day.localeCompare(b.day)
-        })
-        return res
-      })
       .then(json => this.chartData(json))
       .then(users => this.setState({ users }))
   }
