@@ -3,7 +3,7 @@ var router = express.Router()
 const Sequelize = require('sequelize')
 const moment = require('moment')
 const Op = Sequelize.Op
-const sequelize = new Sequelize('genesixx_testcoal', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+const sequelize = new Sequelize('coalibot', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
   host: process.env.DB_IP,
   dialect: 'postgres',
   operatorsAliases: false,
