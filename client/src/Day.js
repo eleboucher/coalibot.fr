@@ -42,9 +42,10 @@ class Day extends Component {
     fetch('/api/days')
       .then(res => res.json())
       .then(res => {
-        return res.sort(function(a, b) {
+        res.sort(function(a, b) {
           return a.day.localeCompare(b.day)
         })
+        return res
       })
       .then(json => this.chartData(json))
       .then(users => this.setState({ users }))
