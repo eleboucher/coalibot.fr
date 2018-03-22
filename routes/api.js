@@ -88,11 +88,7 @@ router.get('/days', function(req, res) {
     .then(res => {
       let day = []
       let result = {}
-      let i = 0
-      for (let x of res) {
-        day[i] = moment(x.date).format('dddd')
-        i++
-      }
+      for (let x of res) day[i] = moment(x.date).format('d')
       day.forEach(function(x) {
         result[x] = (result[x] || 0) + 1
       })

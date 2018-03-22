@@ -1,6 +1,6 @@
 import { Line } from 'react-chartjs-2'
 import React, { Component } from 'react'
-
+import { moment } from 'moment'
 class Day extends Component {
   constructor(props) {
     super(props)
@@ -19,7 +19,7 @@ class Day extends Component {
 
   chartData(json) {
     var labels = json.map(function(e) {
-      return e.day
+      return moment(e.day).format('dddd')
     })
     var data = json.map(function(e) {
       return e.count
@@ -41,6 +41,11 @@ class Day extends Component {
   fetchData() {
     fetch('/api/days')
       .then(res => res.json())
+      .then(res => {
+        return res.sort(function(a, b) {
+          return a.day.localeCompare(b.day)
+        })
+      })
       .then(json => this.chartData(json))
       .then(users => this.setState({ users }))
   }
