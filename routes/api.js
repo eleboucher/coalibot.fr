@@ -3,7 +3,7 @@ var router = express.Router()
 const Sequelize = require('sequelize')
 const moment = require('moment')
 const Op = Sequelize.Op
-const sequelize = new Sequelize('coalibot', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
+const sequelize = new Sequelize('genesixx_testcoal', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
   host: process.env.DB_IP,
   dialect: 'postgres',
   operatorsAliases: false,
@@ -88,7 +88,11 @@ router.get('/days', function(req, res) {
     .then(res => {
       let day = []
       let result = {}
-      for (let x of res) day[i] = moment(x.date).format('d')
+      let i = 0
+      for (let x of res) {
+        day[i] = moment(x.date).format('d')
+        i++
+      }
       day.forEach(function(x) {
         result[x] = (result[x] || 0) + 1
       })
