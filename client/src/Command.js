@@ -1,4 +1,4 @@
-import { Radar } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2'
 import React, { Component } from 'react'
 
 class Command extends Component {
@@ -52,7 +52,7 @@ class Command extends Component {
     return (
       <div className="container">
         <h1 className="title">Command</h1>
-        <Radar data={this.state.users} />
+        <Bar data={this.state.users} />
       </div>
     )
   }
