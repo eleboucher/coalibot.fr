@@ -21,7 +21,7 @@ class Day extends Component {
       return a.day.localeCompare(b.day)
     })
     function dayOfWeekAsString(dayIndex) {
-      return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][dayIndex]
+      return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayIndex]
     }
     var labels = json.map(function(e) {
       return dayOfWeekAsString(e.day)
