@@ -43,11 +43,12 @@ router.get('/users', function(req, res) {
 
 router.get('/nbuser', function(req, res) {
   Command.findAll({
-    attributes: [sequelize.fn('COUNT', sequelize.fn('DISTINCT', 'user'), 'nbuser')],
+    attributes: [sequelize.fn('DISTINCT', sequelize.col('user'))],
+    group: ['user'],
     raw: true
   })
-    .then(function(result) {
-      res.send(result)
+    .then(function(result) {  
+      res.send([ {nbuser : result.length} ])
     })
     .catch(function(error) {
       console.log(error)

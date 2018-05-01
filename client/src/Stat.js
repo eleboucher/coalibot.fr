@@ -29,7 +29,7 @@ class Stat extends Component {
           Number of total user:
           {this.state.nbuser.map((nbuser, index) => (
             <span className={index}>
-              {nbuser.nbuser}
+              {" " + nbuser.nbuser}
             </span>
           ))}
         </p>
