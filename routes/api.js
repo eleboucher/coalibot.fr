@@ -41,6 +41,20 @@ router.get('/users', function(req, res) {
     })
 })
 
+router.get('/nbuser', function(req, res) {
+  Command.findAll({
+    attributes: [sequelize.fn('COUNT', sequelize.fn('DISTINCT', 'user'), 'nbuser')],
+    raw: true
+  })
+    .then(function(result) {
+      res.send(result)
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
+})
+
+
 router.get('/commands', function(req, res) {
   Command.findAll({
     attributes: ['command_name', sequelize.fn('COUNT', sequelize.col('*'))],
