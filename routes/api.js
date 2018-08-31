@@ -1,128 +1,133 @@
-var express = require('express')
-var router = express.Router()
-const Sequelize = require('sequelize')
-const moment = require('moment')
-const Op = Sequelize.Op
-const sequelize = new Sequelize('coalibot', process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
-  host: process.env.DB_IP,
-  dialect: 'postgres',
-  operatorsAliases: false,
-  logging: false,
+var express = require("express");
+var router = express.Router();
+const Sequelize = require("sequelize");
+const moment = require("moment");
+require("dotenv").config();
+const Op = Sequelize.Op;
+const sequelize = new Sequelize(
+  "coalibot",
+  process.env.POSTGRES_USER,
+  process.env.POSTGRES_PASSWORD,
+  {
+    host: process.env.DB_IP,
+    dialect: "postgres",
+    operatorsAliases: false,
+    logging: false,
 
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   }
-})
+);
 
-const Command = sequelize.define('command', {
+const Command = sequelize.define("command", {
   command_name: Sequelize.STRING,
   user: Sequelize.STRING,
   option: Sequelize.STRING,
   date: { type: Sequelize.DATE, defaultValue: Sequelize.NOW }
-})
+});
 
 /* GET users listing. */
-router.get('/users', function(req, res) {
+router.get("/users", function(req, res) {
   Command.findAll({
-    attributes: ['user', sequelize.fn('COUNT', sequelize.col('*'))],
-    group: ['user'],
-    order: [['count', 'DESC']],
+    attributes: ["user", sequelize.fn("COUNT", sequelize.col("*"))],
+    group: ["user"],
+    order: [["count", "DESC"]],
     limit: 5,
     raw: true
   })
     .then(function(result) {
-      res.send(result)
+      res.send(result);
     })
     .catch(function(error) {
-      console.log(error)
-    })
-})
+      console.log(error);
+    });
+});
 
-router.get('/nbuser', function(req, res) {
+router.get("/nbuser", function(req, res) {
   Command.findAll({
-    attributes: [sequelize.fn('DISTINCT', sequelize.col('user'))],
-    group: ['user'],
-    raw: true
-  })
-    .then(function(result) {  
-      res.send([ {nbuser : result.length} ])
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
-})
-
-
-router.get('/commands', function(req, res) {
-  Command.findAll({
-    attributes: ['command_name', sequelize.fn('COUNT', sequelize.col('*'))],
-    group: ['command_name'],
-    order: [['count', 'DESC']],
+    attributes: [sequelize.fn("DISTINCT", sequelize.col("user"))],
+    group: ["user"],
     raw: true
   })
     .then(function(result) {
-      res.send(result)
+      res.send([{ nbuser: result.length }]);
     })
     .catch(function(error) {
-      console.log(error)
-    })
-})
+      console.log(error);
+    });
+});
 
-router.get('/lastest', function(req, res) {
+router.get("/commands", function(req, res) {
   Command.findAll({
-    group: ['command_name', 'id'],
-    order: [['date', 'DESC']],
+    attributes: ["command_name", sequelize.fn("COUNT", sequelize.col("*"))],
+    group: ["command_name"],
+    order: [["count", "DESC"]],
+    raw: true
+  })
+    .then(function(result) {
+      res.send(result);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+});
+
+router.get("/lastest", function(req, res) {
+  Command.findAll({
+    group: ["command_name", "id"],
+    order: [["date", "DESC"]],
     limit: 1,
     raw: true
   })
     .then(function(result) {
-      res.send(result)
+      res.send(result);
     })
     .catch(function(error) {
-      console.log(error)
-    })
-})
+      console.log(error);
+    });
+});
 
-router.get('/days', function(req, res) {
+router.get("/days", function(req, res) {
   Command.findAll({
-    attributes: ['date'],
+    attributes: ["date"],
     where: {
       date: {
         [Op.gte]: moment()
-          .subtract(7, 'days')
+          .subtract(7, "days")
           .toDate()
       }
     },
-    group: ['date', 'id'],
-    order: [['date', 'ASC']],
+    group: ["date", "id"],
+    order: [["date", "ASC"]],
     raw: true
   })
     .then(res => {
-      let day = []
-      let result = {}
-      let i = 0
+      let day = [];
+      let result = {};
+      let i = 0;
       for (let x of res) {
-        day[i] = moment(x.date).format('d')
-        i++
+        day[i] = moment(x.date).format("d");
+        i++;
       }
       day.forEach(function(x) {
-        result[x] = (result[x] || 0) + 1
-      })
+        result[x] = (result[x] || 0) + 1;
+      });
 
-      let ret = []
+      let ret = [];
       for (let x in result) {
-        ret.push({ day: x, count: result[x] })
+        ret.push({ day: x, count: result[x] });
       }
-      return ret
+      return ret;
     })
     .then(function(result) {
-      res.send(result)
+      res.send(result);
     })
     .catch(function(error) {
-      console.log(error)
-    })
-})
-module.exports = router
+      console.log(error);
+    });
+});
+module.exports = router;
