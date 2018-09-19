@@ -78,7 +78,7 @@ router.get("/commands", function(req, res) {
 
 router.get("/lastest", function(req, res) {
   Command.findAll({
-    attributes: ["command_name"],
+    attributes: ["command_name", "user"],
     group: ["command_name", "id"],
     order: [["date", "DESC"]],
     limit: 1,
