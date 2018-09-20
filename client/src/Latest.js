@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Lastest extends Component {
+class Latest extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -17,7 +17,7 @@ class Lastest extends Component {
   }
 
   fetchData() {
-    fetch('/api/lastest')
+    fetch('/api/latest')
       .then(res => res.json())
       .then(commands => this.setState({ commands }))
   }
@@ -26,7 +26,7 @@ class Lastest extends Component {
     return (
       <div className="column is-narrow">
         <p className="subtitle">
-          Lastest:
+          Latest:
           {this.state.commands.map((command, index) => (
             <span className={index}>
               {" '" + command.command_name + "'"} by {command.user}
