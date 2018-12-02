@@ -1,13 +1,13 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define(
-    'User',
-    {
-      login: DataTypes.STRING,
-    },
-    {},
-  );
-  User.associate = function (models) {
-    // associations can be defined here
-  };
-  return User;
-};
+const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate');
+
+const usersSchema = new mongoose.Schema({
+  login: {
+    type: String,
+    maxlength: 50,
+    required: true,
+  },
+});
+usersSchema.plugin(findOrCreate);
+
+module.exports = mongoose.model('User', usersSchema);

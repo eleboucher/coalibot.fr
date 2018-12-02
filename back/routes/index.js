@@ -1,5 +1,6 @@
 const express = require('express');
 const passport = require('passport');
+const isLogged = require('../helpers/logged');
 
 const router = express.Router();
 
@@ -7,6 +8,8 @@ const router = express.Router();
 router.get('/', (req, res) => res.send({ hello: true }));
 
 router.get('/health', (req, res) => res.send({ alive: true }));
+
+router.get('/logged', isLogged, (req, res) => res.send({ logged: true }));
 
 router.get('/login/', passport.authenticate('42'));
 

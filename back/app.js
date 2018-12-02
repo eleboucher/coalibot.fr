@@ -1,13 +1,12 @@
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const FortyTwoStrategy = require('passport-42').Strategy;
 const session = require('express-session');
-const models = require('./models');
 const indexRouter = require('./routes/index');
+const User = require('./models/user');
 
 const app = express();
 
@@ -27,21 +26,21 @@ passport.use(
       },
     },
     (accessToken, refreshToken, profile, cb) => {
-      models.User.findOrCreate({ where: { login: profile.username } })
-        .spread(user => cb(null, user))
+      User.findOrCreate({ login: profile.username })
+        .then(user => cb(null, user.doc))
         .catch(err => cb(err, null));
     },
   ),
 );
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user._id);
   // if you use Model.id as your idAttribute maybe you'd want
   // done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  models.User.findById(id)
+  User.findById(id)
     .then(user => done(null, user))
     .catch(err => done(err, null));
 });

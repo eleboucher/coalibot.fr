@@ -10,26 +10,20 @@ services:
     volumes:
       - ./back:/back
     depends_on:
-      - postgres
+      - db
     networks:
       - coalibot.fr
     ports:
       - "127.0.0.1:${APP_PORT_HOST}:${APP_PORT_HOST}"
 
-  postgres:
-    image: "postgres:10.5-alpine"
+  db:
+    image: mongo
     ports:
-      - "127.0.0.1:${POSTGRES_PORT}:5432"
+      - "27017:27017"
     volumes:
-      - "db-data:/var/lib/postgresql/data"
+      - "db-data:/data/db"
     networks:
       - coalibot.fr
-    environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
-      - POSTGRES_PORT
-      - POSTGRES_HOST
 
 volumes:
   db-data:
