@@ -1,0 +1,38 @@
+# docker-compose.yml
+version: "3.4"
+
+services:
+  app:
+    env_file: .env
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+    volumes:
+      - ./back:/back
+    depends_on:
+      - postgres
+    networks:
+      - coalibot.fr
+    ports:
+      - "127.0.0.1:${APP_PORT_HOST}:${APP_PORT_HOST}"
+
+  postgres:
+    image: "postgres:10.5-alpine"
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT}:5432"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    networks:
+      - coalibot.fr
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - POSTGRES_HOST
+
+volumes:
+  db-data:
+
+networks:
+  coalibot.fr:
