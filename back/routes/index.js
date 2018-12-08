@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const isLogged = require('../helpers/logged');
+const leaderboard = require('./leaderboard');
 
 const router = express.Router();
 
@@ -25,4 +26,7 @@ router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
+
+router.use('/leaderboard', leaderboard);
+
 module.exports = router;
