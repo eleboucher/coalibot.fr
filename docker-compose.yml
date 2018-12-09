@@ -2,7 +2,7 @@
 version: "3.4"
 
 services:
-  app:
+  backend:
     env_file: .env
     build:
       context: .
@@ -24,6 +24,19 @@ services:
       - "db-data:/data/db"
     networks:
       - coalibot.fr
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./front/build:/front
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - coalibot.fr
+    depends_on:
+      - backend
+    ports:
+      - 80:80
+      - 443:443
 
 volumes:
   db-data:
