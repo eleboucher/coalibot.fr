@@ -12,7 +12,7 @@ const Button = styled.button`
   border: 2px solid var(--primary);
   color: var(--primary);
   text-decoration: none;
-
+  box-shadow: 0 2px 6px rgba(170, 185, 200, 0.4);
   ${props =>
     props.primary &&
     css`
