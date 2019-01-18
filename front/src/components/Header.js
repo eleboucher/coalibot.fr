@@ -1,24 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 import Grid from "./Grid";
-import Button from "./Button";
+import Logout from "./Logout";
+
 const Wrapper = styled(Grid)`
+  height: 80px;
+  align-content: center;
   background-color: var(--primary);
   color: var(--lightText);
-  width: 100%;
-  padding-top: 72px;
-  padding-bottom: 100px;
-  margin-bottom: 70px;
-  position: relative;
-
-  justify-items: start;
 `;
 
+const Links = styled.div`
+  grid-column: -1 / span 4;
+
+  justify-self: end;
+`;
+const Title = styled.span`
+  grid-column: span 4 / 1;
+`;
 const Header = ({ children }) => {
   return (
     <>
       <Wrapper>
-        <span>CoaliZone</span>
+        <Title>CoaliZone</Title>
+        <Links>
+          <Logout />
+        </Links>
       </Wrapper>
     </>
   );
