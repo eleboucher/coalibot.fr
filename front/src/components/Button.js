@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const Button = styled.button`
   padding: 0.25em 1em;
-  background: transparent;
+  background: white;
 
   display: inline-flex;
   align-items: center;
