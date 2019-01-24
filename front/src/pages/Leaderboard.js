@@ -15,6 +15,13 @@ const Table = styled.div`
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "rank photo login level coalition";
   margin-top: 20px;
+
+  &:hover {
+    background-color: rgb(169, 169, 169, 0.5);
+  }
+  justify-items: center;
+  cursor: pointer;
+
   @media (max-width: 700px) {
     grid-template-areas: "rank login level" "nothing photo coalition";
     grid-template-columns: repeat(3, 1fr);
@@ -34,7 +41,7 @@ const Photo = styled.img`
   border-radius: 50%;
   object-fit: cover;
 `;
-const Login = styled.span`
+const Login = styled.div`
   grid-area: login;
   align-self: center;
 `;
@@ -96,7 +103,14 @@ class Leaderboard extends React.Component {
       const coal = getCoalitonData(elem.coalition.toLowerCase());
 
       return (
-        <Table key={elem.login}>
+        <Table
+          key={elem.login}
+          onClick={() =>
+            (window.location.href = `https://profile.intra.42.fr/users/${
+              elem.login
+            }`)
+          }
+        >
           <Rank>{index + 1} #</Rank>
           <Photo
             src={`https://cdn.intra.42.fr/users/${elem.login}.jpg`}
