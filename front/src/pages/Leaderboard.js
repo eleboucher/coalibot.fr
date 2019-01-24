@@ -103,7 +103,12 @@ class Leaderboard extends React.Component {
             alt={elem.login}
           />
           <Login>{elem.login}</Login>
-          <Level>{elem.level}</Level>
+          <Level>
+            {elem.level.toLocaleString(undefined, {
+              minimumIntegerDigits: 2,
+              minimumFractionDigits: 2
+            })}
+          </Level>
           <Coalition src={coal.svg} color={coal.color} />
         </Table>
       );
