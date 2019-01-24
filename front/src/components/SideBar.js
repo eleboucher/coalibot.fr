@@ -13,13 +13,21 @@ const Wrapper = styled.div`
   height: 100%;
 
   display: flex;
-  flex-grow: 1;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: var(--lightPrimary);
   color: var(--lightText);
+
+  @media (max-width: 700px) {
+    width: 100%;
+    height: 80px;
+    flex-direction: row;
+    left: unset;
+  }
 `;
 
 const Links = styled.div`
