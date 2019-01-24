@@ -8,6 +8,7 @@ const Content = styled.div`
 
   min-height: 200vh;
   width: 100%;
+  padding: 0 20px;
 `;
 
 const Wrapper = styled.div`
