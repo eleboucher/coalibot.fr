@@ -4,9 +4,11 @@ import styled from "styled-components";
 import SideBar from "./SideBar";
 
 const Content = styled.div`
-  /* padding: 0 20px; */
-  min-height: 200vh;
   grid-area: content;
+
+  min-height: 200vh;
+
+  padding: 0 20px;
 `;
 
 const Wrapper = styled.div`

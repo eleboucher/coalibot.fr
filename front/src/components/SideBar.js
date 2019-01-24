@@ -10,14 +10,14 @@ const Wrapper = styled.div`
   width: 200px;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
 
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* box-shadow: 4px 4px black; */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: var(--lightPrimary);
   color: var(--lightText);
 `;

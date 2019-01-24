@@ -4,15 +4,13 @@ import Grid from "./Grid";
 import Button from "./Button";
 
 const Wrapper = styled(Grid)`
+  grid-area: footer;
   background-color: var(--primary);
   color: var(--lightText);
   grid-auto-flow: dense;
-  grid-row-gap: 50px;
-  margin-top: 70px;
-  padding: 100px 0 70px;
 `;
 
-const Header = ({ children }) => {
+const Footer = ({ children }) => {
   return (
     <>
       <Wrapper>
@@ -22,4 +20,4 @@ const Header = ({ children }) => {
   );
 };
 
-export default Header;
+export default Footer;
