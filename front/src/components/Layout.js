@@ -4,33 +4,21 @@ import styled from "styled-components";
 import SideBar from "./SideBar";
 
 const Content = styled.div`
-  grid-area: content;
+  flex: 1 1 0%;
+  margin-left: 220px;
+  @media (max-width: 768px) {
+    margin-left: 0;
 
-  min-height: 200vh;
-  width: 100%;
-  padding: 0 20px;
+    margin-top: 54px;
+  }
 `;
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 200px repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-areas:
-    "sidebar content content content"
-    "sidebar content content content"
-    "sidebar content content content";
+  display: flex;
+  min-height: 100vh;
 
-  height: 100vh;
-
-  @media (max-width: 700px) {
-    grid-template-areas:
-      "sidebar sidebar sidebar sidebar"
-      "content content content content"
-      "content content content content";
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 80px repeat(2, 1fr);
-
-    justify-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
   }
 `;
 

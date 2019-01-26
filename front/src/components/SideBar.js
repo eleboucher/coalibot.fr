@@ -3,45 +3,56 @@ import styled from "styled-components";
 import Grid from "./Grid";
 import Logout from "./Logout";
 
-const Wrapper = styled.div`
-  grid-area: sidebar;
-
+const Wrapper = styled.aside`
+  width: 220px;
   position: fixed;
-  width: 200px;
-  top: 0;
-  left: 0;
   height: 100%;
-
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
   display: flex;
-
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: var(--lightPrimary);
   color: var(--lightText);
-
-  @media (max-width: 700px) {
-    width: 100%;
-    height: 80px;
+  @media (max-width: 768px) {
+    left: 0px;
+    right: 0px;
+    height: 54px;
+    bottom: auto;
+    width: auto;
+    align-items: center;
     flex-direction: row;
-    left: unset;
   }
 `;
 
 const Links = styled.div`
-  justify-self: end;
+  align-self: center;
+  display: flex;
+
+  flex-direction: inherit;
+  justify-content: space-between;
+
+  align-items: center;
 `;
 
-const Title = styled.span``;
+const Title = styled.div`
+  position: relative;
+  /* margin-top: 2rem; */
+  align-self: center;
+  /* margin-bottom: 100px; */
+`;
 
 const SideBar = ({ children }) => {
   return (
     <>
       <Wrapper>
-        <Title>CoaliZone</Title>
+        <Title>
+          <span>CoaliZone</span>
+        </Title>
         <Links>
+          <span>Home</span>
+          <span>LeaderBoard</span>
           <Logout />
         </Links>
       </Wrapper>
