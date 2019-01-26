@@ -14,7 +14,6 @@ const Table = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "rank photo login level coalition";
-  margin-top: 20px;
 
   &:hover {
     background-color: rgb(169, 169, 169, 0.5);
@@ -80,6 +79,16 @@ const getCoalitonData = coal => {
       return { svg: "", color: "transparant" };
   }
 };
+const TabWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px 0;
+`;
+
+const TabYear = styled.div`
+  margin: 0 15px;
+`;
+
 class Leaderboard extends React.Component {
   state = {
     data: [],
@@ -89,18 +98,23 @@ class Leaderboard extends React.Component {
   };
 
   componentDidMount() {
-    const { date } = this.state;
-    this.setState({ loading: true, data: [] });
+    this.onChangeDate(this.state.date);
+  }
+
+  onChangeDate = date => {
+    this.setState({ loading: true, data: [], date });
     axios.get("/leaderboard/getByYear/" + date).then(({ data }) => {
       this.setState({ data, loading: false });
     });
-  }
+  };
 
   render() {
     const { loading, data } = this.state;
 
     const DataTable = data.map((elem, index) => {
-      const coal = getCoalitonData(elem.coalition.toLowerCase());
+      const coal = elem.coalition
+        ? getCoalitonData(elem.coalition.toLowerCase())
+        : "";
 
       return (
         <Table
@@ -111,7 +125,7 @@ class Leaderboard extends React.Component {
             }`)
           }
         >
-          <Rank>{index + 1} #</Rank>
+          <Rank>{index + 1}</Rank>
           <Photo
             src={`https://cdn.intra.42.fr/users/${elem.login}.jpg`}
             alt={elem.login}
@@ -127,9 +141,26 @@ class Leaderboard extends React.Component {
         </Table>
       );
     });
+    const TabData = () => (
+      <TabWrapper>
+        {this.state.years.map(elem => (
+          <TabYear
+            key={elem}
+            onClick={() => {
+              this.onChangeDate(elem);
+            }}
+          >
+            {elem}
+          </TabYear>
+        ))}
+      </TabWrapper>
+    );
     return (
       <Layout>
-        <Wrapper>{loading ? <Spinner /> : DataTable}</Wrapper>
+        <Wrapper>
+          <TabData />
+          {loading ? <Spinner /> : DataTable}
+        </Wrapper>
       </Layout>
     );
   }
