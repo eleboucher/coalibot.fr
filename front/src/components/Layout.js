@@ -8,7 +8,7 @@ const Content = styled.div`
   margin-left: 220px;
   @media (max-width: 768px) {
     margin-left: 0;
-
+    align-self: center;
     margin-top: 54px;
   }
 `;
