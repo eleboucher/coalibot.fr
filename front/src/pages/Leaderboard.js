@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
+import Button from "../components/Button";
 import getDate from "../utils/getDate";
 import Layout from "../components/Layout";
 import axios from "../config/axios";
@@ -33,6 +33,7 @@ const Rank = styled.span`
   grid-area: rank;
   align-self: center;
 `;
+
 const Photo = styled.img`
   grid-area: photo;
   height: 64px;
@@ -40,6 +41,7 @@ const Photo = styled.img`
   border-radius: 50%;
   object-fit: cover;
 `;
+
 const Login = styled.div`
   grid-area: login;
   align-self: center;
@@ -76,24 +78,44 @@ const getCoalitonData = coal => {
     case "alliance":
       return { svg: alliance, color: "#34c47f" };
     default:
-      return { svg: "", color: "transparant" };
+      return { svg: "", color: "lightgrey" };
   }
 };
+
 const TabWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   margin: 20px 0;
+  :first-child {
+    margin-left: 5px;
+  }
 `;
 
-const TabYear = styled.div`
-  margin: 0 15px;
+const TabYear = styled(Button)`
+  margin: 0 2px;
+  border: none;
+  ${props =>
+    props.selected &&
+    css`
+      background: var(--secondary);
+      color: white;
+    `};
 `;
 
 class Leaderboard extends React.Component {
   state = {
     data: [],
     date: this.props.date || "2017-11",
-    years: ["2018-11", "2018-04", "2017-11", "2017-04", "2016-11"],
+    years: [
+      "2018-11",
+      "2018-04",
+      "2017-11",
+      "2017-04",
+      "2016-11",
+      "2015-11",
+      "2014-11",
+      "2013-11"
+    ],
     loading: true
   };
 
@@ -137,7 +159,9 @@ class Leaderboard extends React.Component {
               minimumFractionDigits: 2
             })}
           </Level>
-          <Coalition src={coal.svg} color={coal.color} />
+          {elem.coalition && (
+            <Coalition src={coal.svg} color={coal.color} alt={elem.coalition} />
+          )}
         </Table>
       );
     });
@@ -149,6 +173,7 @@ class Leaderboard extends React.Component {
             onClick={() => {
               this.onChangeDate(elem);
             }}
+            selected={elem === this.state.date}
           >
             {elem}
           </TabYear>
