@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { Link as RawLink } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { Link as RawLink, withRouter } from "react-router-dom";
 
 import Logout from "./Logout";
 
@@ -59,12 +59,32 @@ const Link = styled(RawLink)`
 
 const NavLink = styled.div`
   margin: 8px 0;
-
-  @media (max-width: 768px) {
-    margin: 0 0 0 0.5rem !important;
-  }
+  ${props =>
+    props.current &&
+    css`
+      background: var(--secondary);
+    `};
 `;
 
+const NavLinkWrapper = styled.div`
+  padding: 6px 5px;
+  ${props =>
+    props.current &&
+    css`
+      background: var(--secondary);
+    `};
+  ${props =>
+    !props.current &&
+    css`
+      :hover {
+        background: rgb(169, 169, 169, 0.5);
+      }
+    `}
+  @media (max-width: 768px) {
+    margin: 0 0 0 0.5rem !important;
+    padding: 6px 0;
+  }
+`;
 const Head = styled.div`
   margin-top: 2rem;
   display: flex;
@@ -79,7 +99,7 @@ const Head = styled.div`
   }
 `;
 
-const SideBar = ({ children }) => {
+const SideBar = ({ children, location }) => {
   return (
     <>
       <Wrapper>
@@ -87,12 +107,16 @@ const SideBar = ({ children }) => {
           <Title as={Link} to="/">
             CoaliZone
           </Title>
-          <NavLink as={Link} to="/">
-            Home
-          </NavLink>
-          <NavLink as={Link} to="/dashboard">
-            LeaderBoard
-          </NavLink>
+          <NavLinkWrapper current={location.pathname === "/"}>
+            <NavLink as={Link} to="/">
+              Home
+            </NavLink>
+          </NavLinkWrapper>
+          <NavLinkWrapper current={location.pathname === "/dashboard"}>
+            <NavLink as={Link} to="/dashboard">
+              LeaderBoard
+            </NavLink>
+          </NavLinkWrapper>
         </Head>
         <Bottom>
           <Logout />
@@ -102,4 +126,4 @@ const SideBar = ({ children }) => {
   );
 };
 
-export default SideBar;
+export default withRouter(SideBar);
