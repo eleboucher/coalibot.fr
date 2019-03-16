@@ -1,0 +1,22 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "*"
+flake8 = "*"
+ipython = "*"
+pre-commit = "*"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+psycopg2-binary = "*"
+rest-social-auth = "*"
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true

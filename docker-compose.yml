@@ -1,0 +1,37 @@
+version: "3.4"
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    stdin_open: true
+    tty: true
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "${BACKEND_PORT_HOST}:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/back
+
+  postgres:
+    image: "postgres:10.5-alpine"
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT_HOST}:${POSTGRES_PORT}"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - POSTGRES_HOST
+
+volumes:
+  db-data:
