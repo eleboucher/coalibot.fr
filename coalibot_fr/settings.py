@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "api",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -126,6 +127,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ("coalibot_fr.backends.FortyTwoOAuth2",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
+
+
 AUTHENTICATION_BACKENDS = [
     "coalibot_fr.backends.FortyTwoOAuth2",
     "django.contrib.auth.backends.ModelBackend",
@@ -137,7 +144,5 @@ DRFSO2_PROPRIETARY_BACKEND_NAME = "fortytwo"
 SOCIAL_AUTH_FORTYTWO_KEY = os.getenv("FORTY_TWO_CLIENT", "foo")
 SOCIAL_AUTH_FORTYTWO_SECRET = os.getenv("FORTY_TWO_SECRET", "bar")
 
-print(SOCIAL_AUTH_FORTYTWO_SECRET)
-DEBUG = True
-REST_SOCIAL_DOMAIN_FROM_ORIGIN = False
+AUTH_USER_MODEL = "api.User"
 

@@ -26,13 +26,12 @@ class FortyTwoOAuth2(BaseOAuth2):
         return params
 
     def get_user_details(self, response):
-        """Return user details from GitHub account"""
-        return {"email": response.get("email") or "", "username": response.get("login")}
+        response["username"] = response.get("login")
+        return response
 
     def user_data(self, token, *args, **kwargs):
         """Loads user data from service"""
         url = "https://api.intra.42.fr/v2/me"
-        print(token)
         auth_header = {"Authorization": "Bearer %s" % token}
         try:
             return self.get_json(url, headers=auth_header)
