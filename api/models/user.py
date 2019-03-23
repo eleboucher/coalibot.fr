@@ -10,15 +10,17 @@ class User(AbstractUser):
 
     def save(self, **kwargs):
         super(User, self).save(**kwargs)
-        cursus = Cursus.objects.filter(login=self.username)
-        if cursus.exists():
-            cursus.user = User
-            cursus.save()
+        student = Student.objects.filter(login=self.username)
+        if student.exists():
+            student.user = User
+            student.save()
 
 
-class Cursus(models.Model):
+class Student(models.Model):
     login = models.CharField(max_length=20, unique=True, blank=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="student")
+    user = models.OneToOneField(
+        User, on_delete=models.DO_NOTHING, related_name="student"
+    )
     level = models.FloatField()
     cursus = models.IntegerField()
     created_at = models.DateField()
