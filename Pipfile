@@ -17,6 +17,7 @@ rest-social-auth = "*"
 celery = "*"
 django-celery-beat = "*"
 redis = "*"
+requests-oauthlib = "*"
 
 [requires]
 python_version = "3.6"
