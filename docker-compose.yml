@@ -1,17 +1,22 @@
 version: "3.4"
 
+x-common-backend: &common-backend
+  restart: unless-stopped
+  env_file:
+    - .env
+  build:
+    context: .
+    dockerfile: ./docker/Dockerfile
+  stdin_open: true
+  tty: true
+  depends_on:
+    - postgres
+  volumes:
+    - .:/back
+
 services:
   django:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
-    stdin_open: true
-    tty: true
-    restart: always
-    depends_on:
-      - postgres
-    env_file:
-      - .env
+    <<: *common-backend
     ports:
       - "${BACKEND_PORT_HOST}:8000"
     command: python manage.py runserver 0.0.0.0:8000
@@ -33,5 +38,20 @@ services:
       - POSTGRES_PORT
       - POSTGRES_HOST
 
+  celery-worker:
+    <<: *common-backend
+    command: celery -A coalibot_fr.celery_app worker -B -E -l debug --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    depends_on:
+     - redis
+
+  redis:
+    image: 'redis:3.0-alpine'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+    ports:
+      - '127.0.0.1:6379:6379'
+
 volumes:
   db-data:
+  redis:

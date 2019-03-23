@@ -14,6 +14,9 @@ django = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
 rest-social-auth = "*"
+celery = "*"
+django-celery-beat = "*"
+redis = "*"
 
 [requires]
 python_version = "3.6"

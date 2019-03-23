@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "social_django",
     "rest_social_auth",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,4 @@ SOCIAL_AUTH_FORTYTWO_SECRET = os.getenv("FORTY_TWO_SECRET", "bar")
 
 AUTH_USER_MODEL = "api.User"
 
+CELERY_BROKER_URL = "redis://redis:6379"
