@@ -1,0 +1,56 @@
+version: "3.4"
+
+x-common-backend:
+  &common-backend
+  env_file:
+    - .env
+  build:
+    context: .
+    dockerfile: ./docker/Dockerfile
+  stdin_open: true
+  tty: true
+  depends_on:
+    - postgres
+  volumes:
+    - .:/back
+
+services:
+  django:
+    <<: *common-backend
+    command: /usr/local/bin/gunicorn --reload -w 2 --threads=8 -b :5050 coalibot_fr.wsgi
+    ports:
+      - "${BACKEND_PORT_HOST}:5050"
+
+  postgres:
+    image: "postgres:10.5-alpine"
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT_HOST}:${POSTGRES_PORT}"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_PORT
+      - POSTGRES_HOST
+
+  celery-worker:
+    <<: *common-backend
+    command: celery -A coalibot_fr.celery_app worker -B -E --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    depends_on:
+     - redis
+     - postgres
+
+  redis:
+    image: 'redis:3.0-alpine'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+    ports:
+      - '127.0.0.1:6379:6379'
+
+volumes:
+  db-data:
+  redis:
