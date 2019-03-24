@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from api.models.base import BaseModel
 
 
 class User(AbstractUser):
@@ -12,16 +13,13 @@ class User(AbstractUser):
         super(User, self).save(**kwargs)
         student = Student.objects.filter(login=self.username)
         if student.exists():
-            student.user = User
+            student.account = User
             student.save()
 
 
-class Student(models.Model):
+class Student(BaseModel):
+    user_id = models.BigIntegerField(primary_key=True, unique=True)
     login = models.CharField(max_length=20, unique=True, blank=False)
-    user = models.OneToOneField(
-        User, on_delete=models.DO_NOTHING, related_name="student"
+    account = models.OneToOneField(
+        User, on_delete=models.DO_NOTHING, related_name="student", null=True, blank=True
     )
-    level = models.FloatField()
-    cursus = models.IntegerField()
-    created_at = models.DateField()
-    coalition = models.CharField(max_length=20)
