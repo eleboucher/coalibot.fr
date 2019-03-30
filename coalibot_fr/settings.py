@@ -148,3 +148,10 @@ SOCIAL_AUTH_FORTYTWO_SECRET = os.getenv("FORTY_TWO_SECRET", "bar")
 AUTH_USER_MODEL = "api.User"
 
 CELERY_BROKER_URL = "redis://redis:6379"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+}
