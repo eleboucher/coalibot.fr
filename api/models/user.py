@@ -11,9 +11,9 @@ class User(AbstractUser):
 
     def save(self, **kwargs):
         super(User, self).save(**kwargs)
-        student = Student.objects.filter(login=self.username)
-        if student.exists():
-            student.account = User
+        student = Student.objects.get(login=self.username)
+        if student:
+            student.account = self
             student.save()
 
 
