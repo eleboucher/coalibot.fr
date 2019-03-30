@@ -61,11 +61,6 @@ def get_cursus(cursus_id):
     else:
         res = client.get(f"/cursus/{cursus_id}")
         data = res.json()
-        cursus = Cursus(
-            cursus_id=cursus_id,
-            name=data["name"],
-            slug=data["slug"],
-            image_url=data["image_url"],
-        )
+        cursus = Cursus(cursus_id=cursus_id, name=data["name"], slug=data["slug"])
         cursus.save()
         return cursus
