@@ -10,7 +10,7 @@ BASE_URL = "https://api.intra.42.fr/v2"
 class FortyTwoClient:
     def __init__(self):
         client = BackendApplicationClient(client_id=settings.SOCIAL_AUTH_FORTYTWO_KEY)
-        self.client = OAuth2Session(client=client, auto_refresh_url=TOKEN_URL)
+        self.client = OAuth2Session(client=client)
         self.token = self._fetch_token()
 
     def _fetch_token(self):
