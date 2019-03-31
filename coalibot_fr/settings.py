@@ -127,13 +127,6 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ("coalibot_fr.backends.FortyTwoOAuth2",),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-}
-
-
 AUTHENTICATION_BACKENDS = [
     "coalibot_fr.backends.FortyTwoOAuth2",
     "django.contrib.auth.backends.ModelBackend",
