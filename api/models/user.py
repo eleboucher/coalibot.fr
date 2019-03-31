@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import AbstractUser
 from api.models.base import BaseModel
 
@@ -11,10 +12,12 @@ class User(AbstractUser):
 
     def save(self, **kwargs):
         super(User, self).save(**kwargs)
-        student = Student.objects.get(login=self.username)
-        if student:
+        try:
+            student = Student.objects.get(login=self.username)
             student.account = self
             student.save()
+        except ObjectDoesNotExist:
+            print("student doesn't exist")
 
 
 class Student(BaseModel):
