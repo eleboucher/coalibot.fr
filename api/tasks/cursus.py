@@ -47,11 +47,14 @@ def fetch_cursus_user():
 
 
 def get_user(user_id, login):
-    user, created = Student.objects.get_or_create(user_id=user_id, login=login)
-    logger.info(user)
-    if created:
+    user = Student.objects.filter(login=login)
+    if user.exists():
+        return user[0]
+    else:
+        user = Student(user_id=user_id, login=login)
         logger.info(f"Student {login} created")
-    return user
+        user.save()
+        return user
 
 
 def get_cursus(cursus_id):

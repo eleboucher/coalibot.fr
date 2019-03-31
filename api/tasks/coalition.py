@@ -1,7 +1,6 @@
 import logging
 
 from celery import shared_task
-from datetime import datetime
 
 from api.models import Coalition, CoalitionUser, Student
 from api.client import FortyTwoClient
@@ -41,6 +40,7 @@ def get_user(user_id):
         res = client.get(f"/users/{user_id}")
         login = res.json()["login"]
         user = Student(user_id=user_id, login=login)
+        user.save()
         logger.info(f"Student {login} created")
         return user
 
