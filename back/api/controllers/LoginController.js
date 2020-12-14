@@ -21,7 +21,7 @@ module.exports = {
           return;
         }
         req.session.user = user;
-        res.redirect(sails.getBaseUrl());
+        res.redirect("https://coalibot.erwanleboucher.dev");
       },
       { failureRedirect: "/api/v1/auth/fortytwo" }
     )(req, res, next);
