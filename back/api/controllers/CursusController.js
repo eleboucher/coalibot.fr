@@ -5,6 +5,8 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+var nestedPop = require("nested-pop");
+
 const query = `SELECT to_char(cursus_users."beginAt",'YYYY') AS starting_period FROM cursus_users WHERE cursus = $1 ORDER BY cursus_users."beginAt"`;
 
 module.exports = {
@@ -28,7 +30,12 @@ module.exports = {
       cursus: req.params.cursus_id,
     })
       .sort("level DESC")
-      .populate("student");
+      .populate("student")
+      .then((student) => {
+        return nestedPop(student, {
+          chats: ["coalition"],
+        });
+      });
     res.json(cursus);
   },
 };
