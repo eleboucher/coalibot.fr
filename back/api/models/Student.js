@@ -14,6 +14,10 @@ module.exports = {
       collection: "user",
       via: "student",
     },
+    coalition: {
+      collection: "coalition_user",
+      via: "student",
+    },
     cursus: {
       collection: "cursus_user",
       via: "student",

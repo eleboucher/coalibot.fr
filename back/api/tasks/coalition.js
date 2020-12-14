@@ -6,8 +6,6 @@ const getCoalition = async (client, coalition_id) => {
   return await Coalition.updateOrCreate(
     {
       id: coalition_id,
-      name: newCoalition.data.name,
-      slug: newCoalition.data.slug,
     },
     {
       id: coalition_id,

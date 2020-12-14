@@ -10,7 +10,7 @@ module.exports = {
 
   attributes: {
     id: { type: "number", required: true, unique: true },
-    name: { type: "string", required: true, unique: true },
+    name: { type: "string", required: true },
     slug: { type: "string", required: true },
     user: {
       collection: "coalition_user",
