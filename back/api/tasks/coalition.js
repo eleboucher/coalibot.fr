@@ -1,7 +1,14 @@
-const getStudent = async (studentID, login) =>
+const fiftyMinutes = 50 * 60 * 1000;
+
+const getStudent = async (studentID) =>
   Student.findOne({ id: studentID });
 
 const getCoalition = async (client, coalition_id) => {
+  const coalition = await Coalition.findOne({ id: coalition_id });
+  const date = new Date();
+  if (coalition && date - new Date(coalition.updateAt) < fiftyMinutes) {
+    return coalition;
+  }
   const newCoalition = await client(`/coalitions/${coalition_id}`);
   await Coalition.updateOrCreate(
     {
@@ -28,15 +35,15 @@ const fetchCoalitionUsers = async (client) => {
     for (coalitionUser of res.data) {
       const coalition = await getCoalition(client, coalitionUser.coalition_id);
       if (coalition === null || coalition === undefined) {
-        sails.log("coalition not found");
+        sails.log('coalition not found');
         continue;
       }
       const student = await getStudent(coalitionUser.user_id);
       if (student === null || student === undefined) {
-        sails.log("user not found");
+        sails.log('user not found');
         continue;
       }
-      const newCoalitionUsers = await Coalition_user.updateOrCreate(
+      await Coalition_user.updateOrCreate(
         {
           student: student.id,
           coalition: coalition.id,
@@ -48,7 +55,6 @@ const fetchCoalitionUsers = async (client) => {
           coalition: coalition.id,
         }
       );
-      sails.log(newCoalitionUsers);
     }
 
     page += 1;
