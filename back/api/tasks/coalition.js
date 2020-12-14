@@ -4,7 +4,11 @@ const getStudent = async (studentID, login) =>
 const getCoalition = async (client, coalition_id) => {
   const newCoalition = await client(`/coalitions/${coalition_id}`);
   Coalition.updateOrCreate(
-    { id: coalition_id },
+    {
+      id: coalition_id,
+      name: newCoalition.data.name,
+      slug: newCoalition.data.slug,
+    },
     {
       id: coalition_id,
       name: newCoalition.data.name,
