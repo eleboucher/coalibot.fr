@@ -3,7 +3,7 @@ const getStudent = async (studentID, login) =>
 
 const getCoalition = async (client, coalition_id) => {
   const newCoalition = await client(`/coalitions/${coalition_id}`);
-  return await Coalition.updateOrCreate(
+  await Coalition.updateOrCreate(
     {
       id: coalition_id,
     },
@@ -16,6 +16,7 @@ const getCoalition = async (client, coalition_id) => {
       score: newCoalition.data.score,
     }
   );
+  return await Coalition.findOne({ id: coalition_id });
 };
 
 const fetchCoalitionUsers = async (client) => {
@@ -27,12 +28,12 @@ const fetchCoalitionUsers = async (client) => {
     for (coalitionUser of res.data) {
       const coalition = await getCoalition(client, coalitionUser.coalition_id);
       if (coalition === null || coalition === undefined) {
-        sails.log('coalition not found');
+        sails.log("coalition not found");
         continue;
       }
       const student = await getStudent(coalitionUser.user_id);
       if (student === null || student === undefined) {
-        sails.log('user not found');
+        sails.log("user not found");
         continue;
       }
       const newCoalitionUsers = await Coalition_user.updateOrCreate(
