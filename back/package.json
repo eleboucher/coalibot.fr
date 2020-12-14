@@ -1,0 +1,42 @@
+{
+  "name": "coalibot-fr",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.3",
+    "axios": "^0.21.0",
+    "client-oauth2": "^4.3.3",
+    "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
+    "p-throttle": "^3.1.0",
+    "passport": "^0.4.1",
+    "passport-42": "^1.2.6",
+    "sails": "^1.4.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^2.0.0",
+    "sails-postgresql": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo",
+    "dev": "export NODE_ENV=development && nodemon --ignore 'tmp/*' app.js && exit 0"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/erwanleboucher/coalibot-fr.git"
+  },
+  "author": "erwanleboucher",
+  "license": "",
+  "engines": {
+    "node": "^15.2"
+  }
+}
