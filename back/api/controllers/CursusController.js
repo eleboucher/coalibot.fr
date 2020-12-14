@@ -28,8 +28,7 @@ module.exports = {
       cursus: req.params.cursus_id,
     })
       .sort("level DESC")
-      .populate("student")
-      .populate("student.coalition");
+      .populate("student");
     res.json(cursus);
   },
 };
