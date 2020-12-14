@@ -9,27 +9,27 @@
  */
 
 module.exports.routes = {
-  "GET /v1/auth/fortytwo": {
+  "GET /api/v1/auth/fortytwo": {
     controller: "LoginController",
     action: "FortyTwoAuth",
   },
-  "GET /v1/auth/fortytwo/callback": {
+  "GET /api/v1/auth/fortytwo/callback": {
     controller: "LoginController",
     action: "FortyTwoCallback",
   },
-  "GET /v1/auth/logged": {
+  "GET /api/v1/auth/logged": {
     controller: "LoginController",
     action: "Logged",
   },
-  "GET /v1/cursus": {
+  "GET /api/v1/cursus": {
     controller: "CursusController",
     action: "ListCursus",
   },
-  "GET /v1/cursus/:id": {
+  "GET /api/v1/cursus/:id": {
     controller: "CursusController",
     action: "ListStartingPeriodByCursus",
   },
-  "GET /v1/cursus/:cursus_id/:starting_period": {
+  "GET /api/v1/cursus/:cursus_id/:starting_period": {
     controller: "CursusController",
     action: "ListStudentByStartingPeriodAndCursus",
   },
