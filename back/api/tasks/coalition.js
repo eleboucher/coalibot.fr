@@ -1,5 +1,5 @@
 const getStudent = async (studentID, login) =>
-  Student.findOrCreate({ id: studentID }, { id: studentID, login });
+  Student.findOne({ id: studentID });
 
 const getCoalition = async (client, coalition_id) => {
   const newCoalition = await client(`/coalitions/${coalition_id}`);
@@ -30,10 +30,10 @@ const fetchCoalitionUsers = async (client) => {
       if (coalition === null || coalition === undefined) {
         continue;
       }
-      const student = await getStudent(
-        coalitionUser.user.id,
-        coalitionUser.user.login
-      );
+      const student = await getStudent(coalitionUser.user_id);
+      if (student === null || student === undefined) {
+        continue;
+      }
       await Coalition_user.updateOrCreate(
         {
           student: student.id,
