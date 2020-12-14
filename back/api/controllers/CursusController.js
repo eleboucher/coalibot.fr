@@ -31,9 +31,9 @@ module.exports = {
     })
       .sort("level DESC")
       .populate("student")
-      .then((student) => {
-        return nestedPop(student, {
-          chats: ["coalition"],
+      .then((cursusUser) => {
+        return nestedPop(cursusUser, {
+          student: ["coalition"],
         });
       });
     res.json(cursus);
