@@ -18,9 +18,6 @@ module.exports = {
     },
     score: { type: "number" },
     rank: { type: "number" },
-
-    createdAt: { type: "number", autoCreatedAt: true },
-    updatedAt: { type: "number", autoUpdatedAt: true },
   },
   updateOrCreate: function (criteria, values) {
     var self = this; // reference for use by callbacks

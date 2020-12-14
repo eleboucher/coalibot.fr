@@ -5,7 +5,7 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
-const query = `SELECT to_char(cursus_users."beginAt",'YYYY') AS starting_period FROM cursus_users WHERE cursus = $1 ORDER BY cursus_users."beginAt" LIMIT 1000;`;
+const query = `SELECT to_char(cursus_users."beginAt",'YYYY') AS starting_period FROM cursus_users WHERE cursus = $1 ORDER BY cursus_users."beginAt"`;
 
 module.exports = {
   ListCursus: async (req, res, next) => {

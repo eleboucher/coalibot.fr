@@ -16,7 +16,5 @@ module.exports = {
       collection: "cursus_user",
       via: "cursus",
     },
-    createdAt: { type: "number", autoCreatedAt: true },
-    updatedAt: { type: "number", autoUpdatedAt: true },
   },
 };

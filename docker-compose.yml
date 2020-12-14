@@ -1,0 +1,45 @@
+# docker-compose.yml
+version: "3.7"
+
+services:
+  backend:
+    env_file: .env
+    build:
+      context: ./back/
+      dockerfile: Dockerfile
+    ports:
+      - 1337:1337
+    depends_on:
+      - db
+    networks:
+      - coalibot.fr
+      - db-network
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: coalibot
+    volumes:
+       - db-data:/var/lib/postgresql
+    networks:
+      - db-network
+
+  front:
+    build:
+      context: ./front/
+      dockerfile: Dockerfile
+    networks:
+      - coalibot.fr
+    depends_on:
+      - backend
+    ports:
+      - 8081:80
+
+volumes:
+  db-data:
+
+networks:
+  db-network:
+  coalibot.fr:

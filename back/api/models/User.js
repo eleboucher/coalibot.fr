@@ -14,7 +14,5 @@ module.exports = {
       model: "student",
       unique: true,
     },
-    createdAt: { type: "number", autoCreatedAt: true },
-    updatedAt: { type: "number", autoUpdatedAt: true },
   },
 };

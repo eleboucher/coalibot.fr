@@ -23,8 +23,6 @@ module.exports = {
     grade: { type: "string" },
     beginAt: { type: "ref", columnType: "timestamp" },
     endAt: { type: "ref", columnType: "timestamp" },
-    createdAt: { type: "number", autoCreatedAt: true },
-    updatedAt: { type: "number", autoUpdatedAt: true },
   },
   updateOrCreate: function (criteria, values) {
     var self = this; // reference for use by callbacks

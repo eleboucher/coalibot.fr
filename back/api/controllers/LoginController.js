@@ -6,7 +6,6 @@
  */
 
 const passport = require("passport");
-const { Sails } = require("sails");
 
 module.exports = {
   FortyTwoAuth: (req, res, next) => {

@@ -12,7 +12,6 @@
  * For more information on configuring datastores, check out:
  * https://sailsjs.com/config/datastores
  */
-console.log(process.env.DATABASE_URL);
 
 module.exports.datastores = {
   /***************************************************************************
