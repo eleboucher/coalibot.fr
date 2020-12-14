@@ -21,7 +21,7 @@ module.exports = {
           return;
         }
         req.session.user = user;
-        res.redirect("http://localhost:8080");
+        res.redirect(sails.getBaseUrl());
       },
       { failureRedirect: "/api/v1/auth/fortytwo" }
     )(req, res, next);
