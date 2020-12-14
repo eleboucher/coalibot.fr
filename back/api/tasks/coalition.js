@@ -24,17 +24,18 @@ const fetchCoalitionUsers = async (client) => {
     `/coalitions_users?page[number]=${page}&page[size]=100`
   );
   while (res.data.length !== 0) {
-    sails.log(page, JSON.stringify(res.data));
     for (coalitionUser of res.data) {
       const coalition = await getCoalition(client, coalitionUser.coalition_id);
       if (coalition === null || coalition === undefined) {
+        sails.log('coalition not found');
         continue;
       }
       const student = await getStudent(coalitionUser.user_id);
       if (student === null || student === undefined) {
+        sails.log('user not found');
         continue;
       }
-      await Coalition_user.updateOrCreate(
+      const newCoalitionUsers = await Coalition_user.updateOrCreate(
         {
           student: student.id,
           coalition: coalition.id,
@@ -46,6 +47,7 @@ const fetchCoalitionUsers = async (client) => {
           coalition: coalition.id,
         }
       );
+      sails.log(newCoalitionUsers);
     }
 
     page += 1;
