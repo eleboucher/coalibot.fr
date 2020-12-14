@@ -23,7 +23,7 @@ module.exports = {
     const cursus = await Cursus_user.find({
       beginAt: {
         ">": new Date(req.params.starting_period, 0, 1),
-        "<": new Date(int(req.params.starting_period) + 1, 0, 1),
+        "<": new Date(parseInt(req.params.starting_period) + 1, 0, 1),
       },
       cursus: req.params.cursus_id,
     })
