@@ -9,7 +9,7 @@ module.exports = {
   tableName: "coalition_users",
 
   attributes: {
-    id: { type: "number", required: true, unique: true },
+    id: { type: "number", autoIncrement: true },
     coalition: {
       model: "coalition",
     },
