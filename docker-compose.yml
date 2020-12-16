@@ -40,7 +40,7 @@ services:
     networks:
       - coalibot.fr
     depends_on:
-      - backend
+      - back
     ports:
       - 8081:80
 
