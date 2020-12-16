@@ -16,14 +16,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.set("trust proxy", 1); // trust first proxy
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
-  })
-);
+if (process.env.NODE_ENV == "production") {
+  const redis = require("redis");
+  const session = require("express-session");
+
+  let RedisStore = require("connect-redis")(session);
+  let redisClient = redis.createClient(process.env.REDIS_URL);
+  app.use(
+    session({
+      store: new RedisStore({ client: redisClient }),
+      secret: "keyboard cat",
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: true },
+    })
+  );
+} else {
+  app.use(
+    session({
+      secret: "keyboard cat",
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: true },
+    })
+  );
+}
 
 passport.use(
   new FortyTwoStrategy(
