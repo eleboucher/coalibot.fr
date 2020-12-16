@@ -62,6 +62,6 @@ passport.deserializeUser((user, done) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
 
 module.exports = app;
