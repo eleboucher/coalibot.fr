@@ -24,9 +24,9 @@ const fetchCursusUsers = async (client) => {
     `/cursus_users?page[number]=${page}&page[size]=100&filter[campus_id]=1`
   );
   while (res.data.length !== 0) {
-    try {
-      console.log(page, JSON.stringify(res.data));
-      for (cursusUser of res.data) {
+    console.log(page, JSON.stringify(res.data));
+    for (cursusUser of res.data) {
+      try {
         const cursus = await getCursus(client, cursusUser.cursus_id);
         if (cursus === null || cursus === undefined) {
           console.debug("cursus not found");
@@ -52,15 +52,15 @@ const fetchCursusUsers = async (client) => {
             cursus_id: cursus.id,
           }
         );
+      } catch (e) {
+        console.error(e);
       }
-
-      page += 1;
-      res = await client(
-        `/cursus_users?page[number]=${page}&page[size]=100&filter[campus_id]=1`
-      );
-    } catch (e) {
-      console.error(e);
     }
+
+    page += 1;
+    res = await client(
+      `/cursus_users?page[number]=${page}&page[size]=100&filter[campus_id]=1`
+    );
   }
 };
 
