@@ -29,7 +29,7 @@ services:
       - db-network
 
   redis:
-    image: redis-alpine
+    image: redis
     networks:
       - redis
 
