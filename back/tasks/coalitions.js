@@ -53,20 +53,21 @@ const fetchCoalitionUsers = async (client) => {
           continue;
         }
 
-        await updateOrCreate(
-          "coalitions_users",
-          {
-            id: coalitionUser.id,
-          },
-          {
-            id: coalitionUser.id,
-            rank: coalitionUser.rank,
-            score: coalitionUser.score,
-            student_id: student[0].id,
-            coalition_id: coalition.id,
-          }
-        );
-        console.debug(`coalitions_users created ${cursusUser.id}`);
+        const _,
+          action = await updateOrCreate(
+            "coalitions_users",
+            {
+              id: coalitionUser.id,
+            },
+            {
+              id: coalitionUser.id,
+              rank: coalitionUser.rank,
+              score: coalitionUser.score,
+              student_id: student[0].id,
+              coalition_id: coalition.id,
+            }
+          );
+        console.debug(`coalitions_users ${action} ${cursusUser.id}`);
       } catch (e) {
         console.error(e);
         continue;

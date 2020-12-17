@@ -40,23 +40,23 @@ const fetchCursusUsers = async (client) => {
           cursusUser.user.id,
           cursusUser.user.login
         );
-        await updateOrCreate(
-          "cursus_users",
-          {
-            student_id: student.id,
-            cursus_id: cursus.id,
-          },
-          {
-            id: cursusUser.id,
-            grade: cursusUser.grade || "",
-            level: cursusUser.level,
-            begin_at: new Date(cursusUser.begin_at),
-            end_at: new Date(cursusUser.end_at),
-            student_id: student.id,
-            cursus_id: cursus.id,
-          }
-        );
-        console.debug(`cursus_user created ${cursusUser.id}`);
+        const _,
+          action = await updateOrCreate(
+            "cursus_users",
+            {
+              id: cursusUser.id,
+            },
+            {
+              id: cursusUser.id,
+              grade: cursusUser.grade || "",
+              level: cursusUser.level,
+              begin_at: new Date(cursusUser.begin_at),
+              end_at: new Date(cursusUser.end_at),
+              student_id: student.id,
+              cursus_id: cursus.id,
+            }
+          );
+        console.debug(`cursus_user ${action} ${cursusUser.id}`);
       } catch (e) {
         console.error(e);
       }
