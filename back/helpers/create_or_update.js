@@ -21,7 +21,7 @@ const createOrUpdate = async (tableName, criteria, values) => {
       }
     }
 
-    return obj[0], action;
+    return [obj[0], action];
   });
 };
 
