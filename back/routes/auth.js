@@ -3,16 +3,16 @@ const passport = require("passport");
 
 const router = express.Router();
 
-router.get("/login", passport.authenticate("42"));
+router.get("/fortytwo", passport.authenticate("42"));
 
 router.get("/logged", (req, res) => {
   return res.json({ logged: !!req.user });
 });
 
 router.get(
-  "/login/callback",
+  "/fortytwo/callback",
   passport.authenticate("42", {
-    failureRedirect: "/login",
+    failureRedirect: "/fortytwo",
     successRedirect: "/",
   })
 );
