@@ -4,6 +4,8 @@ version: "3.7"
 services:
   back:
     env_file: .env
+    environment:
+      NODE_ENV: production
     build:
       context: ./back/
       dockerfile: Dockerfile
@@ -42,7 +44,7 @@ services:
     depends_on:
       - back
     ports:
-      - 8080:80
+      - 8081:80
 
 volumes:
   db-data:
