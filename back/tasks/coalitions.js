@@ -5,7 +5,7 @@ const findOrCreate = require("../helpers/find_or_create");
 const fiftyMinutes = 50 * 60 * 1000;
 
 const getStudent = async (studentID) =>
-  knex("students").where({ id: studentID })[0];
+  knex("students").where({ id: studentID });
 
 const getCoalition = async (client, coalition_id) => {
   const coalition = await knex("coalitions").where({ id: coalition_id })[0];
@@ -39,8 +39,8 @@ const fetchCoalitionUsers = async (client) => {
     for (coalitionUser of res.data) {
       try {
         const student = await getStudent(coalitionUser.user_id);
-        if (student === null || student === undefined) {
-          console.debug("user not found");
+        if (!student[0]) {
+          console.debug(`user not found ${coalitionUser.user_id}`);
           continue;
         }
 
@@ -49,24 +49,24 @@ const fetchCoalitionUsers = async (client) => {
           coalitionUser.coalition_id
         );
         if (coalition === null || coalition === undefined) {
-          console.debug("coalition not found");
+          console.debug(`coalition not found ${coalitionUser.coalition_id}`);
           continue;
         }
 
         await updateOrCreate(
           "coalitions_users",
           {
-            student: student.id,
-            coalition: coalition.id,
+            id: coalitionUser.id,
           },
           {
+            id: coalitionUser.id,
             rank: coalitionUser.rank,
             score: coalitionUser.score,
-            student: student.id,
-            coalition: coalition.id,
+            student_id: student[0].id,
+            coalition_id: coalition.id,
           }
         );
-        console.debug("coalition_users created");
+        console.debug(`coalitions_users created ${cursusUser.id}`);
       } catch (e) {
         console.error(e);
         continue;
