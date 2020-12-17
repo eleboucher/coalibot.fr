@@ -66,7 +66,7 @@ const fetchCoalitionUsers = async (client) => {
             coalition_id: coalition.id,
           }
         );
-        console.debug(`coalitions_users ${action} ${cursusUser.id}`);
+        console.debug(`coalitions_users ${action} ${coalitionUser.id}`);
       } catch (e) {
         console.error(e);
         continue;
