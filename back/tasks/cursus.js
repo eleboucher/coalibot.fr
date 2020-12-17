@@ -9,11 +9,14 @@ const getCursus = async (client, cursusID) => {
   let cursus = await knex("cursus").where({ id: cursusID });
   if (cursus.length === 0) {
     const newCursus = await client(`/cursus/${cursusID}`);
-    cursus = await knex("cursus").insert({
-      id: cursusID,
-      name: newCursus.data.name,
-      slug: newCursus.data.slug,
-    });
+    cursus = await knex("cursus").insert(
+      {
+        id: cursusID,
+        name: newCursus.data.name,
+        slug: newCursus.data.slug,
+      },
+      ["*"]
+    );
   }
   return cursus[0];
 };
