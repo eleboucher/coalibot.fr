@@ -14,6 +14,14 @@ const cursusController = {
   },
   ListStudentByStartingPeriodAndCursus: async (req, res) => {
     const cursus = await knex("cursus_users")
+      .select(
+        "students.id as id",
+        "students.login as login",
+        "cursus_users.level as level",
+        "cursus_users.grade as grade",
+        "coalitions_users.score as score",
+        "coalitions_users.rank as coalition_rank"
+      )
       .where({
         cursus_id: req.params.cursus_id,
       })
