@@ -31,7 +31,7 @@ const cursusController = {
         "coalitions",
         "coalitions.id",
         "coalitions_users.coalition_id"
-      );
+      ).orderBy("cursus_users.level");
 
     res.json(cursus);
   },
